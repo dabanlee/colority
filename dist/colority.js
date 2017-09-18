@@ -86,7 +86,7 @@ function colority() {
         var colors = {};
         var results = [];
 
-        transformColors(imageData, _this.options.interval || 10, function (rgb) {
+        transformColors(imageData, _this.options.skip || 10, function (rgb) {
             return colors[rgb] = rgb in colors ? colors[rgb] + 1 : 1;
         });
         mapColors(colors, function (key, value) {

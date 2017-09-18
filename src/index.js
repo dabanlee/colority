@@ -27,7 +27,7 @@ export default function colority() {
         const colors = {};
         const results = [];
 
-        transformColors(imageData, this.options.interval || 10, rgb => colors[rgb] = rgb in colors ? colors[rgb] + 1 : 1);
+        transformColors(imageData, this.options.skip || 10, rgb => colors[rgb] = rgb in colors ? colors[rgb] + 1 : 1);
         mapColors(colors, (key, value) => {
             results.push({
                 color: key,
