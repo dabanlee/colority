@@ -1,0 +1,9 @@
+{
+    "presets": [["es2015", { "modules": false }]],
+    "plugins": [
+        "transform-class-properties",
+        "transform-flow-strip-types",
+        "syntax-flow",
+        "transform-object-rest-spread"
+    ]
+}
