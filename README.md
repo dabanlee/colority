@@ -6,6 +6,8 @@
 
 extracting colors from pictures.
 
+[DEMO](https://justclear.github.io/colority/demo/?image=https://user-gold-cdn.xitu.io/2017/8/8/c5267eadfded82a98cd3cad7a16d5a48?imageView2/1/w/1200/h/700/q/85/interlace/1)
+
 ## Installation
 
 ```sh
