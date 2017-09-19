@@ -1,26 +1,18 @@
-import { preload, getContext, transformColors, mapColors } from './common';
+export default function colority(imageURL, options, callback) {
+    if (!(this instanceof colority)) return new colority(imageURL, options, callback);
 
-export default function colority() {
-    if (!(this instanceof colority)) return new colority(...arguments);
-
-    const argument = [...arguments];
-    this.imageURL = ``;
+    this.imageURL = imageURL;
     this.options = {};
     this.callback = () => {};
 
-    if (typeof argument[0] === 'string') {
-        this.imageURL = argument[0];
-        if (typeof argument[2] === 'function') {
-            this.callback = argument[2];
-            this.options = typeof argument[1] == 'object' ? argument[1] : this.options;
-        } else {
-            this.callback = typeof argument[1] == 'function' ? argument[1] : this.callback;
-        }
+    if (callback === undefined) {
+        this.callback = options;
     } else {
-        console.log(`first param in "colority()" must be string.`);
+        this.options = options;
+        this.callback = callback;
     }
 
-    preload(this.imageURL, ([image]) => {
+    preload(this.imageURL, image => {
         const context = getContext(image.naturalWidth, image.naturalHeight);
         context.drawImage(image, 0, 0);
         const imageData = context.getImageData(0, 0, image.naturalWidth, image.naturalHeight).data;
@@ -36,4 +28,31 @@ export default function colority() {
         });
         this.callback(results.sort((a, b) => b.count - a.count).map(result => result.color));
     });
+}
+
+function preload(imageURL, done) {
+    const image = new Image();
+    image.crossOrigin = '*';
+    image.src = imageURL;
+    image.addEventListener('load', () => done(image));
+    image.addEventListener('error', () => done(image));
+}
+
+function getContext(width, height) {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    return canvas.getContext('2d');
+}
+
+function transformColors(data, skip, callback) {
+    for (let i = 0; i < data.length; i += 4 * skip) {
+        callback(`rgb(${data[i]},${data[i + 1]},${data[i + 2]})`);
+    }
+}
+
+function mapColors(data, callback) {
+    for (let key in data) {
+        callback(key, data[key]);
+    }
 }
