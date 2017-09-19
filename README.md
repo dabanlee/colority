@@ -12,6 +12,31 @@ extracting colors from pictures.
 $ yarn add colority
 ```
 
+## Usage
+
+```js
+import colority from 'colority';
+
+colority(imageURL, colors => {
+    // do something here...
+});
+
+// or skip pixels
+
+colority(imageURL, {
+    skip: 1000,
+}, colors => {
+    // do something here...
+});
+```
+
+## APIs
+
+- `colority(imageURL[, options], colors => {})`
+    - `imageURL`: picture url.
+    - `options.skip`: skip pixels(Optional, default to `10`).
+    - `colors`: the extracted `rgb` colors(Sort by quantity).
+
 ## License
 
 Licensed under the [MIT License](https://github.com/JustClear/just-sketch/blob/master/LICENSE)
