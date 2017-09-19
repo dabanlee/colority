@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>colority demo</title>
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .image {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .color {
+        height: 50px;
+        border-bottom: 1px solid #fefefe;
+    }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <div class="color js-color"></div>
+        <img class="image js-image">
+    </div>
+    <script src="../dist/colority.js"></script>
+    <script>
+    (function () {
+        var imageURL = getQuery('image') || '';
+        colority(imageURL, {
+            skip: 100,
+        }, colors => {
+            document.querySelector('.js-image').src = imageURL;
+            var colorNodes = [].slice.call(document.querySelectorAll('.js-color'));
+            colorNodes.map(function (node, index) {
+                node.style.backgroundColor = colors[index];
+            });
+        });
+
+        function getQuery(name, string = '') {
+            var url = decodeURIComponent(location.href),
+                query = location.search.substr(1) || url.split('?')[1] || '',
+                result = parseQuery(string ? string : query)[name];
+            return result ? result : null;
+        }
+
+        function parseQuery(query) {
+            var result = {},
+                param = '',
+                params = [],
+                str = decodeURIComponent(query);
+            if (str) params = str.split('&');
+            for (var i = 0; i < params.length; i++) {
+                param = params[i].split('=');
+                param[0] ? (result[param[0]] = param[1] === undefined ? null : param[1]) : '';
+            }
+            return result;
+        }
+    })();
+    </script>
+</body>
+</html>
