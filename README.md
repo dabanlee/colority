@@ -1,4 +1,6 @@
-<h1 align="center" style="font-size: 100px;">🎨</h1>
+<p align="center">
+    <span style="font-size: 5rem;">🎨</span>
+</p>
 
 <h1 align="center">colority</h1>
 
