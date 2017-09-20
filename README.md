@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 100px;">🎨</p>
+<h1 align="center" style="font-size: 100px;">🎨</h1>
 
 <h1 align="center">colority</h1>
 
