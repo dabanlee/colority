@@ -1,8 +1,8 @@
 {
   "name": "colority",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "extracting colors from pictures.",
-  "main": "src/index.js",
+  "main": "dist/colority.js",
   "module": "src/index.js",
   "moduleName": "colority",
   "scripts": {
