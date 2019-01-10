@@ -1,18 +1,16 @@
 {
   "name": "colority",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "extracting colors from pictures.",
   "main": "dist/colority.js",
   "module": "src/index.js",
   "moduleName": "colority",
   "scripts": {
     "test": "mocha test/index.js",
-    "start": "npm run watch",
-    "watch": "NODE_ENV=development rollup -w -c rollup.config.js",
+    "start": "NODE_ENV=development rollup -w -c rollup.config.js",
     "dev": "NODE_ENV=development rollup -c rollup.config.js",
     "prod": "NODE_ENV=production rollup -c rollup.config.js",
-    "publish": "rm -rf dist && npm run dev && npm run prod",
-    "lint": "eslint src"
+    "publish": "rm -rf dist && npm run dev && npm run prod"
   },
   "repository": {
     "url": "https://github.com/JustClear/colority.git",
@@ -21,20 +19,13 @@
   "author": "JustClear <576839360@qq.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
-    "babel-plugin-syntax-flow": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^4.6.1",
+    "tslib": "^1.9.3",
+    "mocha": "^5.2.0",
     "expect.js": "^0.3.1",
-    "mocha": "^3.5.3",
-    "rollup-plugin-babel": "^3.0.2",
+    "typescript": "^3.2.2",
+    "rollup-plugin-alias": "^1.5.1",
+    "rollup-plugin-babel-minify": "^6.2.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-uglify": "^2.0.1",
-    "rollup-watch": "^4.3.1"
+    "rollup-plugin-typescript": "^1.0.0"
   }
 }

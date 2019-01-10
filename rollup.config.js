@@ -1,26 +1,45 @@
-import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
-import sourcemaps from 'rollup-plugin-sourcemaps';
+import alias from 'rollup-plugin-alias';
+import minify from 'rollup-plugin-babel-minify';
 import resolve from 'rollup-plugin-node-resolve';
+import typescript from 'rollup-plugin-typescript';
 
-const packages = require('./package.json');
-const fileName = process.env.NODE_ENV === 'development' ? `colority` : `colority.min`;
+const isProd = process.env.NODE_ENV === 'production';
+const { moduleName } = require('./package.json');
+const getFilePath = (type = '') => `dist/${moduleName}${type == '' ? '' : '.'}${type}.js`;
+const output = options => ({
+    name: moduleName,
+    sourcemap: true,
+    ...options,
+});
+
 const configure = {
-    entry: `src/index.js`,
-    moduleName: packages.moduleName,
-    moduleId: packages.moduleName,
-    sourceMap: true,
-    targets: [{
-        dest: `dist/${fileName}.js`,
+    input: 'src/index.ts',
+    output: [output({
+        file: getFilePath(),
         format: 'umd',
-    }],
+    }), output({
+        file: getFilePath('es'),
+        format: 'es',
+    })],
     plugins: [
-        babel(),
-        sourcemaps(),
-        resolve(),
+        alias({
+            common: './common',
+        }),
+        typescript(),
+        resolve({
+            extensions: ['.js', '.ts'],
+        }),
     ],
+    external: [],
 };
 
-if (process.env.NODE_ENV === 'production') configure.plugins.push(uglify());
+if (isProd) {
+    configure.output = configure.output.map(output => {
+        const format = output.format == 'umd' ? '' : `.${output.format}`;
+        output.file = `dist/${moduleName}${format}.min.js`;
+        return output;
+    });
+    configure.plugins.push(minify());
+}
 
-export default configure;
+module.exports = configure;
